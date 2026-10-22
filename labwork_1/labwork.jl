@@ -1,4 +1,3 @@
-using CSV, DataFrames, Plots;
 #note that there is an ~8ms slippage
 #because of 120hz of my phone screen and the 1ms accuracy
 #capturing a video of the video also has sync problems and is unrealistic,
@@ -28,3 +27,12 @@ plot!(p, f, minimum(x), maximum(x), label="Theoretical T(L)")
 
 savefig(p, "pendulum_exp1.pdf")
 
+p_log = scatter(x, y,
+    label=["t1" "t2" "t3" "t4" "t5" "t6"],
+    title="Pendulum Cycle with respect to its Length (Log-Log)",
+    xlabel="Pendulum length L (m)",
+    ylabel="Pendulum cycle T (s)",
+    xscale=:log10,
+    yscale=:log10)
+
+savefig(p_log, "pendulum_exp1_log.pdf")
