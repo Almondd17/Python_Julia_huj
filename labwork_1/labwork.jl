@@ -1,0 +1,30 @@
+using CSV, DataFrames, Plots;
+#note that there is an ~8ms slippage
+#because of 120hz of my phone screen and the 1ms accuracy
+#capturing a video of the video also has sync problems and is unrealistic,
+#using the original clips is preferred.
+using CSV, DataFrames, Plots
+
+df = CSV.read("labwork_1/exp1.csv", DataFrame)
+
+x = parse.(Float64, string.(df[:, 1]))
+#the approximate length of the bottle of water is 16cm or 0.16m
+#we measured from the bottom, to measure from the center mass it would be L-0.08m
+println(x)
+x=x.-0.08
+println(x)
+y = parse.(Float64, string.(Matrix(df[:, 2:end])))
+
+p = scatter(x, y,
+    label=["t1" "t2" "t3" "t4" "t5" "t6"],
+    xlabel="Pendulum length L (m)",
+    ylabel="Pendulum cycle T (s)",
+    title="Pendulum Cycle (T) with respect to its Length (L)")
+
+f(L) = 2pi*sqrt(L/9.8)
+
+plot!(p, f, minimum(x), maximum(x), label="Theoretical T(L)")
+
+
+savefig(p, "pendulum_exp1.pdf")
+
