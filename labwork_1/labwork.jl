@@ -1,3 +1,5 @@
+#yuval.bloom@mail.huji.ac.il
+#GraphiBot
 #note that there is an ~8ms slippage
 #because of 120hz of my phone screen and the 1ms accuracy
 #capturing a video of the video also has sync problems and is unrealistic,
@@ -18,21 +20,23 @@ p = scatter(x, y,
     label=["t1" "t2" "t3" "t4" "t5" "t6"],
     xlabel="Pendulum length L (m)",
     ylabel="Pendulum cycle T (s)",
-    title="Pendulum Cycle (T) with respect to its Length (L)")
+    title="Pendulum Cycle (T) vs Length (L)")
 
 f(L) = 2pi*sqrt(L/9.8)
 
-plot!(p, f, minimum(x), maximum(x), label="Theoretical T(L)")
+plot!(p, f, minimum(x), maximum(x), label="Theoretical T(L): 2pi*sqrt(L/9.8)")
 
 
 savefig(p, "pendulum_exp1.pdf")
 
 p_log = scatter(x, y,
     label=["t1" "t2" "t3" "t4" "t5" "t6"],
-    title="Pendulum Cycle with respect to its Length (Log-Log)",
+    title="Pendulum Cycle vs Length (Log-Log)",
     xlabel="Pendulum length L (m)",
     ylabel="Pendulum cycle T (s)",
     xscale=:log10,
     yscale=:log10)
+
+plot!(p_log, f, minimum(x), maximum(x), label="Theoretical T(L): 2pi*sqrt(L/9.8)")
 
 savefig(p_log, "pendulum_exp1_log.pdf")
