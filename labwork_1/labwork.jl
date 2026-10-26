@@ -40,3 +40,29 @@ p_log = scatter(x, y,
 plot!(p_log, f, minimum(x), maximum(x), label="Theoretical T(L): 2pi*sqrt(L/9.8)")
 
 savefig(p_log, "pendulum_exp1_log.pdf")
+
+
+
+p_text = plot(
+    framestyle=:none,
+    showaxis=false,
+    grid=false,
+    xlims=(0, 1),
+    ylims=(0, 1),
+    annotations=[
+        (0.02, 0.8, text("The code for making the graphs: (written in julia)", 12, :left)),
+        (0.02, 0.6, text("", 10, :left)),
+        (0.02, 0.4, text("", 10, :left))
+    ],
+    legend=false
+)
+
+p_combined = plot(
+    p,
+    p_log,
+    p_text,
+    layout=grid(3, 1, heights=[0.42, 0.42, 0.16]),
+    size=(800, 1200)
+)
+
+savefig(p_combined, "pendulum_exp1_combined.pdf")
